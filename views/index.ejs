@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Url Shortener</title>
+</head>
+<body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <div>
+        <div class="my-4 form-inline">
+            <label for="fullUrl" class="sr-only">Url</label>
+            <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
+            <button class="btn btn-success" onclick="submit()">Click to shorten Url</button>
+        </div>
+        <div class="form-group row">
+            <label for="shortUrl" class="col-sm-2 col-form-label" >Shortened URL</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="shortUrl">
+            </div>
+        </div>
+      </div>
+      
+      
+      <table class="table table-striped table-responsive">
+        <thead>
+          <tr>
+            <th>Full URL</th>
+            <th>Short URL</th>
+            <th>Clicks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% shortUrls.forEach(shortUrl => { %>
+            <tr>
+              <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+              <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+              <td><%= shortUrl.clicks %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script>
+      function submit() {
+        //   alert("hi");
+          let fullUrl = document.getElementById("fullUrl").value
+          let resultField =  document.getElementById("shortUrl")
+          let result;
+          const url = '/shortUrls';
+          let data = {
+              fullUrl: fullUrl
+          }
+          let fetchData = {
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+          }
+          fetch(url, fetchData)
+          .then(response => response.json())
+          .then(data => {
+            resultField.value = data;
+          });
+      }
+  </script>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "npm-url-shortener",
+  "version": "1.0.0",
+  "description": "This is a URL shortener app using node, mongo and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rundev": "nodemon server.js"
+  },
+  "author": "soumithri chilakamarri",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.4",
+    "shortid": "^2.2.15"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
